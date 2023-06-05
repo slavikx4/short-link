@@ -78,7 +78,7 @@ func chooseStorage() bool {
 }
 
 func initConfig() error {
-	viper.AddConfigPath("internal/config")
+	viper.AddConfigPath("configs")
 	viper.SetConfigName("config")
 	return viper.ReadInConfig()
 }
