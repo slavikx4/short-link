@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/slavikx4/short-link/pkg/api/proto;proto";
+
+service ShortLink{
+  rpc Get(GetRequest) returns (GetResponse){}
+  rpc Post(PostRequest) returns (PostResponse){}
+}
+
+// четрыре разных message нужны для возможного дальнейшего расширения функционала
+message GetRequest{
+  string shortLink = 1;
+}
+
+message GetResponse{
+  string originalLink = 1;
+}
+
+message PostRequest{
+  string originLink = 1;
+}
+
+message PostResponse{
+  string shortLink = 1;
+}
