@@ -3,19 +3,19 @@ version: '3'
 services:
   app_im:
     build: ./
-    command: ./app
+    command: ./short-link
     ports:
       - "8080:8080"
 
   app_db:
     build: ./
-    command: ./wait-for-postgres.sh db ./app -db
+    command: ./wait-for-postgres.sh db ./short-link -storage=true
     ports:
       - "8080:8080"
     depends_on:
       - db
     environment:
-      DATABASE_URL: "postgres://postgres:postgres@db:5432/postgres?sslmode=disable"
+      DATABASE_URL: "postgres://postgres:postgres@db:5432/Link?sslmode=disable"
       DB_PASSWORD: "postgres"
 
   db:
@@ -26,10 +26,6 @@ services:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: postgres
     volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./postgres/:/docker-entrypoint-initdb.d/
+      - ./.database/postgres/data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
-
-volumes:
-  db-data:
+      - "5436:5432"
