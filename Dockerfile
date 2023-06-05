@@ -11,6 +11,6 @@ RUN apt-get -y install postgresql-client
 RUN chmod +x wait-for-postgres.sh
 
 RUN go mod download
-RUN go build -o app ./cmd/app/main.go
+RUN go build -o short-link ./cmd/short-link/main.go
 
-CMD ["./app"]
+CMD ["./short-link"]
